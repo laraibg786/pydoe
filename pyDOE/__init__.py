@@ -19,11 +19,12 @@ The following individuals forked and works on `pyDOE2`:
 - Copyright (C) 2018 - Rickard Sjoegren and Daniel Svensson
 """
 
+
 from pyDOE.doe_box_behnken import *
 from pyDOE.doe_composite import *
 from pyDOE.doe_factorial import *
-from pyDOE.doe_lhs import *
 from pyDOE.doe_fold import *
+from pyDOE.doe_gsd import gsd
+from pyDOE.doe_lhs import *
 from pyDOE.doe_plackett_burman import *
 from pyDOE.var_regression_matrix import *
-from pyDOE.doe_gsd import gsd
