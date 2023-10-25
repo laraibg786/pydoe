@@ -56,7 +56,7 @@ The default 3-factor Box-Behnken design::
            [ 0.,  0.,  0.],
            [ 0.,  0.,  0.],
            [ 0.,  0.,  0.]])
-    
+
 A customized design with four factors, but only a single center point::
 
     >>> bbdesign(4, center=1)
