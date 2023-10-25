@@ -1,3 +1,7 @@
+[![Tests](https://github.com/relf/pyDOE3/actions/workflows/tests.yml/badge.svg)](https://github.com/relf/pyDOE3/actions/workflows/tests.yml)
+[![Documentation](https://readthedocs.org/projects/pydoe3/badge/?version=latest)](https://pydoe3.readthedocs.io/en/latest/?badge=latest)
+
+
 pyDOE: An experimental design package for python
 =====================================================
 
@@ -31,10 +35,9 @@ Requirements
 - NumPy
 - SciPy
 
-Installation and download
--------------------------
 
-Through pip:
+Installation
+------------
 
 ```bash
 pip install pyDOE
