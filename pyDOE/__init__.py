@@ -36,6 +36,13 @@ from pyDOE.doe_fold import fold
 from pyDOE.doe_gsd import gsd
 from pyDOE.doe_lhs import lhs
 from pyDOE.doe_plackett_burman import pbdesign
+from pyDOE.doe_taguchi import (
+    TaguchiObjective,
+    compute_snr,
+    get_orthogonal_array,
+    list_orthogonal_arrays,
+    taguchi_design,
+)
 from pyDOE.var_regression_matrix import var_regression_matrix
 
 from ._version import __version__
@@ -55,6 +62,11 @@ __all__ = [
     "pbdesign",
     "var_regression_matrix",
     "gsd",
+    "taguchi_design",
+    "TaguchiObjective",
+    "compute_snr",
+    "list_orthogonal_arrays",
+    "get_orthogonal_array",
 ]
 
 from ._version import __version__  # noqa
