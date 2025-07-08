@@ -23,6 +23,7 @@ The following individuals forked `pyDOE2` and worked on `pyDOE3`:
 
 from pyDOE.doe_box_behnken import bbdesign
 from pyDOE.doe_composite import ccdesign
+from pyDOE.doe_doehlert import doehlert_shell_design, doehlert_simplex_design
 from pyDOE.doe_factorial import (
     alias_vector_indices,
     ff2n,
@@ -67,6 +68,8 @@ __all__ = [
     "compute_snr",
     "list_orthogonal_arrays",
     "get_orthogonal_array",
+    "doehlert_shell_design",
+    "doehlert_simplex_design",
 ]
 
 from ._version import __version__  # noqa

@@ -40,6 +40,8 @@ number of factors:
 
   #. :ref:`Central-Composite <central_composite>` (``ccdesign``)
 
+  #. :ref:`Doehlert Design <doehlert_design>` (``doehlert_shell_design``, ``doehlert_simplex_design``)
+
 - :ref:`Randomized Designs <randomized>`
 
   #. :ref:`Latin-Hypercube <latin_hypercube>` (``lhs``)
