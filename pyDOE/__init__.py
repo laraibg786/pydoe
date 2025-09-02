@@ -44,6 +44,7 @@ from pyDOE.doe_taguchi import (
     list_orthogonal_arrays,
     taguchi_design,
 )
+from pyDOE.grid_designs import sukharev_grid
 from pyDOE.var_regression_matrix import var_regression_matrix
 
 from ._version import __version__
@@ -70,6 +71,7 @@ __all__ = [
     "get_orthogonal_array",
     "doehlert_shell_design",
     "doehlert_simplex_design",
+    "sukharev_grid",
 ]
 
 from ._version import __version__  # noqa

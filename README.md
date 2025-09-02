@@ -6,8 +6,8 @@ pyDOE: An experimental design package for python
 [![DOI](https://zenodo.org/badge/709347557.svg)](https://zenodo.org/doi/10.5281/zenodo.10958492)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-`pyDOE` is a package that is designed to help the scientist, engineer,
-statistician, etc., to construct appropriate experimental designs.
+This package is designed to help the scientist, engineer, statistician, etc., to
+construct appropriate experimental designs.
 
 Capabilities
 ------------
@@ -15,20 +15,30 @@ Capabilities
 The package currently includes functions for creating designs for any
 number of factors:
 
-- Factorial Designs
+- **Factorial Designs**
   - General Full-Factorial (``fullfact``)
   - 2-level Full-Factorial (``ff2n``)
   - 2-level Fractional Factorial (``fracfact``)
   - Plackett-Burman (``pbdesign``)
   - Generalized Subset Designs (``gsd``)
-- Response-Surface Designs 
+
+- **Response-Surface Designs** 
   - Box-Behnken (``bbdesign``)
   - Central-Composite (``ccdesign``)
   - Doehlert Design (``doehlert_shell_design``, ``doehlert_simplex_design``)
-- Randomized Designs
+
+- **Randomized Designs**
   - Latin-Hypercube (``lhs``)
-- Taguchi Designs
+
+- **Low-Discrepancy Sequences**
+  - Sukharev Grid (``sukharev_grid``)
+
+- **Taguchi Designs**
   - Orthogonal arrays and robust design utilities (``taguchi_design``, ``compute_snr``)
+- **Optimal Designs**
+  - Advanced optimal design algorithms (``optimal_design``)
+  - Optimality criteria (``A``, ``C``, ``D``, ``E``, ``G``, ``I``, ``S``, ``T``, ``V``)
+  - Search algorithms (``Sequential (Dykstra)``, ``Simple Exchange (Wynn-Mitchell)``, ``Fedorov``, ``Modified Fedorov``, ``DETMAX``)
 
 See the original [pyDOE homepage](http://pythonhosted.org/pyDOE) for details
 on usage and other notes.
@@ -79,3 +89,4 @@ References
 - [Latin-Hypercube designs](http://en.wikipedia.org/wiki/Latin_hypercube_sampling)
 - [Taguchi designs](http://en.wikipedia.org/wiki/Taguchi_methods)
 - [Generalized Subset Designs](https://doi.org/10.1021/acs.analchem.7b00506)
+- [Optimal experimental design](https://en.wikipedia.org/wiki/Optimal_experimental_design)

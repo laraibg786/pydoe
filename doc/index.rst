@@ -46,9 +46,19 @@ number of factors:
 
   #. :ref:`Latin-Hypercube <latin_hypercube>` (``lhs``)
 
+- :ref:`Low-Discrepancy Sequences <low_discrepancy>`
+
+  #. :ref:`Sukharev Grid <sukharev_grid>` (``sukharev_grid``)
+
 - :ref:`Taguchi Designs <taguchi_designs>`
 
   #. Orthogonal arrays and robust design utilities (``taguchi_design``, ``compute_snr``)
+
+- :ref:`Optimal Designs <optimal_designs>`
+
+  #. Advanced optimal design algorithms (``optimal_design``)
+  #. Optimality criteria (``A``, ``C``, ``D``, ``E``, ``G``, ``I``, ``S``, ``T``, ``V``)
+  #. Search algorithms (``Sequential (Dykstra)``, ``Simple Exchange (Wynn-Mitchell)``, ``Fedorov``, ``Modified Fedorov``, ``DETMAX``)
 
 Requirements
 ============
@@ -105,6 +115,7 @@ References
 - `Central composite designs`_
 - `Latin-Hypercube designs`_
 - `Taguchi designs <https://www.itl.nist.gov/div898/handbook/pri/section5/pri56.htm>`_
+- `Optimal experimental design <https://en.wikipedia.org/wiki/Optimal_experimental_design>`_
 
 There is also a wealth of information on the `NIST`_ website about the
 various design matrices that can be created as well as detailed information
