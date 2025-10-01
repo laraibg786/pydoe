@@ -29,6 +29,8 @@ number of factors:
 
 - **Randomized Designs**
   - Latin-Hypercube (``lhs``)
+  - Random K-Means (``random_k_means``)
+  - Random Uniform (``random_uniform``)
 
 - **Low-Discrepancy Sequences**
   - Sukharev Grid (``sukharev_grid``)
@@ -37,6 +39,10 @@ number of factors:
   - Rank-1 Lattice Design (``rank1_lattice``)
   - Korobov Sequence (``korobov_sequence``)
   - Cranley-Patterson Randomization (``cranley_patterson_shift``)
+
+- **Sampling Designs**
+  - Morris Method (``morris_sampling``)
+  - Saltelli Sampling (``saltelli_sampling``)
 
 - **Taguchi Designs**
   - Orthogonal arrays and robust design utilities (``taguchi_design``, ``compute_snr``)

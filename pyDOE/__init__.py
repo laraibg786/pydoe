@@ -40,7 +40,10 @@ from pyDOE.doe_halton import halton_sequence
 from pyDOE.doe_korobov import korobov_sequence
 from pyDOE.doe_lhs import lhs
 from pyDOE.doe_plackett_burman import pbdesign
+from pyDOE.doe_random_k_means import random_k_means
+from pyDOE.doe_random_uniform import random_uniform
 from pyDOE.doe_rank1 import rank1_lattice
+from pyDOE.doe_saltelli import saltelli_sampling
 from pyDOE.doe_sobol import sobol_sequence
 from pyDOE.doe_taguchi import (
     TaguchiObjective,
@@ -49,7 +52,9 @@ from pyDOE.doe_taguchi import (
     list_orthogonal_arrays,
     taguchi_design,
 )
+from pyDOE.doe_vanilla_morris import morris_sampling
 from pyDOE.grid_designs import sukharev_grid
+from pyDOE.utils import scale_samples
 from pyDOE.var_regression_matrix import var_regression_matrix
 
 from ._version import __version__
@@ -82,6 +87,11 @@ __all__ = [
     "sobol_sequence",
     "rank1_lattice",
     "korobov_sequence",
+    "random_k_means",
+    "random_uniform",
+    "morris_sampling",
+    "saltelli_sampling",
+    "scale_samples",
 ]
 
 from ._version import __version__  # pyright: ignore[reportMissingImports] # noqa

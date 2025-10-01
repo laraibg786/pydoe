@@ -46,6 +46,8 @@ number of factors:
 - :ref:`Randomized Designs <randomized>`
 
   #. :ref:`Latin-Hypercube <latin_hypercube>` (``lhs``)
+  #. :ref:`Random K-Means <random_k_means>` (``random_k_means``)
+  #. :ref:`Random Uniform <random_uniform>` (``random_uniform``)
 
 - :ref:`Low-Discrepancy Sequences <low_discrepancy>`
 
@@ -60,6 +62,11 @@ number of factors:
   #. :ref:`Korobov Sequence <korobov_sequence>` (``korobov_sequence``)
 
   #. :ref:`Cranley-Patterson Randomization <cranley_patterson>` (``cranley_patterson_shift``)
+
+- :ref:`Sampling Designs <sampling_designs>`
+
+  #. :ref:`Morris Method <morris_method>` (``morris_sampling``)
+  #. :ref:`Saltelli Sampling <saltelli_sampling>` (``saltelli_sampling``)
 
 - :ref:`Taguchi Designs <taguchi_designs>`
 
