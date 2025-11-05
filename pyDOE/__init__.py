@@ -45,6 +45,10 @@ from pyDOE.doe_random_uniform import random_uniform
 from pyDOE.doe_rank1 import rank1_lattice
 from pyDOE.doe_saltelli import saltelli_sampling
 from pyDOE.doe_sobol import sobol_sequence
+from pyDOE.doe_sparse_grid import (
+    doe_sparse_grid,
+    sparse_grid_dimension,
+)
 from pyDOE.doe_taguchi import (
     TaguchiObjective,
     compute_snr,
@@ -92,6 +96,8 @@ __all__ = [
     "morris_sampling",
     "saltelli_sampling",
     "scale_samples",
+    "doe_sparse_grid",
+    "sparse_grid_dimension",
 ]
 
 from ._version import __version__  # pyright: ignore[reportMissingImports] # noqa

@@ -35,7 +35,7 @@ def scale_samples(samples: np.ndarray, bounds: List[Tuple[float, float]]) -> np.
     Examples
     --------
     >>> import numpy as np
-    >>> from pyDOE3.utils import scale_samples
+    >>> from pyDOE.utils import scale_samples
     >>> samples = np.array([[0.1, 0.2], [0.8, 0.9]])
     >>> bounds = [(-1, 1), (0, 10)]
     >>> scale_samples(samples, bounds)

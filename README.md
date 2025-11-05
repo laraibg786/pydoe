@@ -54,6 +54,9 @@ number of factors:
   - Advanced optimal design algorithms (``optimal_design``)
   - Optimality criteria (``A``, ``C``, ``D``, ``E``, ``G``, ``I``, ``S``, ``T``, ``V``)
   - Search algorithms (``Sequential (Dykstra)``, ``Simple Exchange (Wynn-Mitchell)``, ``Fedorov``, ``Modified Fedorov``, ``DETMAX``)
+- **Sparse Grid Designs**
+  - Sparse Grid Design (``doe_sparse_grid``)
+  - Sparse Grid Dimension (``sparse_grid_dimension``)
 
 See the original [pyDOE homepage](http://pythonhosted.org/pyDOE) for details
 on usage and other notes.
@@ -108,3 +111,4 @@ References
 - [Taguchi designs](http://en.wikipedia.org/wiki/Taguchi_methods)
 - [Generalized Subset Designs](https://doi.org/10.1021/acs.analchem.7b00506)
 - [Optimal experimental design](https://en.wikipedia.org/wiki/Optimal_experimental_design)
+- [Sparse grid](https://en.wikipedia.org/wiki/Sparse_grid)
