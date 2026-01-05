@@ -1,5 +1,4 @@
 import unittest
-
 import numpy as np
 
 from pyDOE.doe_star import star
