@@ -1,0 +1,181 @@
+name: Code Test
+
+on:
+  workflow_call:
+    inputs: &wf-inputs
+      fresh-build:
+        type: boolean
+        required: false
+        default: false
+      index-url:
+        type: string
+        required: false
+        default: ""
+      version:
+        type: string
+        required: false
+        default: ""
+      artifact-name:
+        type: string
+        required: false
+        default: ""
+      artifact-run-id:
+        type: string
+        required: false
+        default: "build"
+      test-all-versions:
+        type: boolean
+        required: false
+        default: false
+  workflow_dispatch:
+    inputs: *wf-inputs
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      fresh-build: ${{ steps.validation.outputs.fresh-build }}
+      index-url: ${{ steps.validation.outputs.index-url }}
+      artifact-name: ${{ steps.validation.outputs.artifact-name }}
+      artifact-run-id: ${{ steps.validation.outputs.artifact-run-id }}
+      supported-versions: ${{ steps.fetch-versions.outputs.supported-versions }}
+      bound-versions: ${{ steps.fetch-versions.outputs.bound-versions }}
+    steps:
+      - name: validate inputs
+        id: validation
+        run: |
+          fresh_build=${{ inputs.fresh-build }}
+          index_url="${{ inputs.index-url }}"
+          artifact_name="${{ inputs.artifact-name }}"
+          artifact_run_id="${{ inputs.artifact-run-id }}"
+
+          # the index-url should not be provided if fresh-build is true
+          if [[ "$fresh_build" == "true" && -n "${{ inputs.index-url }}" ]]; then
+            echo "::warning::Both `fresh-build` and `index-url` were provided; ignoring `fresh-build`"
+            fresh_build=false
+            index_url=""
+          fi
+
+          # the artifact-name should not be provided if fresh-build is true
+          if [[ ("$fresh_build" == "true" || -n "${{ inputs.index-url }}" ) && -n "${{ inputs.artifact-name }}" ]]; then
+            echo "::warning::Ignoring `artifact-name` due to misconfig with `fresh-build` or `index-url`"
+            artifact_name=""
+            artifact_run_id=""
+          fi
+
+          # the artifact-name must accompany a run-id
+          if [[ (-n "${{ inputs.artifact-name }}" && -z "${{ inputs.artifact-run-id }}") ||\
+                (-z "${{ inputs.artifact-name }}" && -n "${{ inputs.artifact-run-id }}") ]]; then
+            echo "::error::Invalid configuration: both `artifact-name` and `artifact-run-id` must be provided together."
+            exit 1
+          fi
+
+          echo "fresh-build=$fresh_build"         >> $GITHUB_OUTPUT
+          echo "index-url=$index_url"             >> $GITHUB_OUTPUT
+          echo "artifact-name=$artifact_name"     >> $GITHUB_OUTPUT
+          echo "artifact-run-id=$artifact_run_id" >> $GITHUB_OUTPUT
+
+      - name: Fetch supported python
+        id: fetch-versions
+        if: ${{ inputs.test-all-versions }}
+        run: |
+          versions=$(curl -fsSL https://endoflife.date/api/v1/products/python/ \
+                     | jq '[ .result.releases[] | select(.isEol == false) | .label ]')
+
+          echo "supported-versions=$(echo $versions |jq .|@json)"        >> $GITHUB_OUTPUT
+          echo "bound-versions=$(echo $versions |jq [.[0],.[-1]]|@json)" >> $GITHUB_OUTPUT
+
+  fresh-build:
+    needs: setup
+    if: ${{ fromJson(needs.setup.outputs.fresh-build) }}
+    uses: ./.github/workflows/build.yml
+
+  basic-test:
+    needs: &test-reqs
+      - setup
+      - fresh-build
+    if: ${{ !fromJson(inputs.test-all-versions) }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    name: Basic Testing on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - &artifact-info
+        name: update artifact info
+        id: artifact-info
+        run: |
+          artifact_name="${{ inputs.artifact-name }}"
+          artifact_run_id="${{ inputs.artifact-run-id }}"
+          if [[ ${{ needs.fresh-build.result == 'success' }} ]]; then
+            artifact_name="${{ needs.fresh-build.outputs.artifact-name }}"
+            artifact_run_id="${{ needs.fresh-build.outputs.run-id }}"
+          fi
+
+          echo "artifact-name=$artifact_name" >> $GITHUB_OUTPUT
+          echo "artifact-run-id=$artifact_run_id" >> $GITHUB_OUTPUT
+
+      - &download-build
+        name: Download Build Artifacts
+        if: ${{ steps.artifact-info.outputs.artifact-name != '' && steps.artifact-info.outputs.artifact-run-id != '' }}
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ steps.artifact-info.outputs.artifact-name }}
+          run-id: ${{ steps.artifact-info.outputs.artifact-run-id }}
+
+      - uses: astral-sh/setup-uv@v7
+
+      - &package-installation
+        name: Install package
+        run: |
+          uv venv
+          package="pyDOE"
+          if [ -n "${{ inputs.version }}" ]; then
+            package="pyDOE==${{ inputs.version }}"
+          fi
+
+          if [ -n "${{ needs.setup.outputs.index-url }}" ]; then
+            uv pip install -v --group test --default-index "${{ needs.setup.outputs.index-url }}" "$package"
+          else
+            uv pip install -v --group test --find-links=./dist "$package"
+          fi
+
+      - &test-run
+        name: Run Tests
+        run: uv run pytest --doctest-modules pyDOE tests
+
+
+  all-version-testing:
+    needs: *test-reqs
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        py-version: ${{ fromJson(needs.setup.outputs.supported-versions) }}
+        include:
+          - os: windows-latest
+            py-version: ${{ fromJson(needs.setup.outputs.bound-versions)[0] }}
+          - os: windows-latest
+            py-version: ${{ fromJson(needs.setup.outputs.bound-versions)[1] }}
+          - os: macos-latest
+            py-version: ${{ fromJson(needs.setup.outputs.bound-versions)[0] }}
+          - os: macos-latest
+            py-version: ${{ fromJson(needs.setup.outputs.bound-versions)[1] }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - *artifact-info
+      - *download-build
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.py-version }}
+
+      - *package-installation
+      - *test-run
