@@ -8,3 +8,6 @@ MANIFEST
 
 .vscode/
 doc/_build
+.coverage
+coverage.xml
+htmlcov

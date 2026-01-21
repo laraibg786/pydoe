@@ -1,23 +1,35 @@
-pyDOE: An experimental design package for python
-=================================================
+PyDOE: An Experimental Design Package for Python
+================================================
 
-[![Tests](https://github.com/relf/pyDOE3/actions/workflows/tests.yml/badge.svg)](https://github.com/relf/pyDOE3/actions/workflows/tests.yml)
-[![Documentation](https://readthedocs.org/projects/pydoe3/badge/?version=latest)](https://pydoe3.readthedocs.io/en/latest/?badge=latest)
+[![Tests](https://github.com/pydoe/pydoe/actions/workflows/tests.yml/badge.svg)](https://github.com/pydoe/pydoe/actions/workflows/tests.yml)
+[![Documentation](https://github.com/pydoe/pydoe/actions/workflows/docs.yml/badge.svg)](https://github.com/pydoe/pydoe/actions/workflows/docs.yml)
 [![DOI](https://zenodo.org/badge/709347557.svg)](https://zenodo.org/doi/10.5281/zenodo.10958492)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-[![PyPI Downloads](https://img.shields.io/pypi/dm/pyDOE3.svg?label=PyPI%20downloads)](https://pypi.org/project/pyDOE3/)
-[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pydoe3.svg?label=Conda%20downloads)](https://anaconda.org/conda-forge/pydoe3)
-[![Python versions](https://img.shields.io/pypi/pyversions/pyDOE3.svg)](https://pypi.org/project/pyDOE3/)
+[![Stack Overflow](https://img.shields.io/badge/stackoverflow-Ask%20questions-blue.svg)](
+https://stackoverflow.com/questions/tagged/pydoe)
+[![codecov](https://codecov.io/gh/pydoe/pydoe/branch/master/graph/badge.svg)](https://codecov.io/gh/pydoe/pydoe)
+[![License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](./LICENSE)
 
-This package is designed to help the scientist, engineer, statistician, etc., to
-construct appropriate experimental designs.
+[![PyPI Downloads](https://img.shields.io/pypi/dm/pyDOE.svg?label=PyPI%20downloads)](https://pypi.org/project/pyDOE/)
+[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pydoe.svg?label=Conda%20downloads)](https://anaconda.org/conda-forge/pydoe)
+[![Python versions](https://img.shields.io/pypi/pyversions/pyDOE.svg)](https://pypi.org/project/pyDOE/)
 
-Capabilities
-------------
+PyDOE is a Python package for design of experiments (DOE), enabling scientists, engineers, and statisticians to efficiently construct experimental designs.
 
-The package currently includes functions for creating designs for any
-number of factors:
+- **Website:** https://pydoe.github.io/pydoe/
+- **Documentation:** https://pydoe.github.io/pydoe/reference/factorial/
+- **Source code:** https://github.com/pydoe/pydoe
+- **Contributing:** https://pydoe.github.io/pydoe/contributing/
+- **Bug reports:** https://github.com/pydoe/pydoe/issues
+
+
+Overview
+--------
+
+The package provides extensive support for design-of-experiments (DOE) methods and is capable of creating designs for any number of factors.
+
+It provides:
 
 - **Factorial Designs**
   - General Full-Factorial (``fullfact``)
@@ -26,7 +38,7 @@ number of factors:
   - Plackett-Burman (``pbdesign``)
   - Generalized Subset Designs (``gsd``)
 
-- **Response-Surface Designs** 
+- **Response-Surface Designs**
   - Box-Behnken (``bbdesign``)
   - Central-Composite (``ccdesign``)
   - Doehlert Design (``doehlert_shell_design``, ``doehlert_simplex_design``)
@@ -50,22 +62,15 @@ number of factors:
 
 - **Taguchi Designs**
   - Orthogonal arrays and robust design utilities (``taguchi_design``, ``compute_snr``)
+
 - **Optimal Designs**
   - Advanced optimal design algorithms (``optimal_design``)
   - Optimality criteria (``A``, ``C``, ``D``, ``E``, ``G``, ``I``, ``S``, ``T``, ``V``)
   - Search algorithms (``Sequential (Dykstra)``, ``Simple Exchange (Wynn-Mitchell)``, ``Fedorov``, ``Modified Fedorov``, ``DETMAX``)
+
 - **Sparse Grid Designs**
   - Sparse Grid Design (``doe_sparse_grid``)
   - Sparse Grid Dimension (``sparse_grid_dimension``)
-
-See the original [pyDOE homepage](http://pythonhosted.org/pyDOE) for details
-on usage and other notes.
-
-Requirements
-------------
-
-- NumPy
-- SciPy
 
 Installation
 ------------
@@ -76,39 +81,9 @@ pip install pyDOE
 
 Credits
 -------
-
-`pyDOE` original code was originally converted from code by the following
-individuals for use with Scilab:
-
-- Copyright (C) 2012-2013, Michael Baudin
-- Copyright (C) 2012, Maria Christopoulou
-- Copyright (C) 2010-2011, INRIA, Michael Baudin
-- Copyright (C) 2009, Yann Collette
-- Copyright (C) 2009, CEA, Jean-Marc Martinez
-
-`pyDOE` was converted to Python by the following individual:
-
-- Copyright (c) 2014 - Abraham D. Lee
-- Copyright (C) 2018 - Rickard Sjögren and Daniel Svensson
+For more info see: https://pydoe.github.io/pydoe/credits/
 
 License
 -------
 
 This package is provided under the *BSD License* (3-clause)
-
-References
-----------
-
-- [Factorial designs](http://en.wikipedia.org/wiki/Factorial_experiment)
-- [Plackett-Burman designs](http://en.wikipedia.org/wiki/Plackett-Burman_design)
-- [Box-Behnken designs](http://en.wikipedia.org/wiki/Box-Behnken_design)
-- [Central composite designs](http://en.wikipedia.org/wiki/Central_composite_design)
-- [Doehlert Design](https://academic.oup.com/jrsssc/article/19/3/231/6882590)
-- [Latin-Hypercube designs](http://en.wikipedia.org/wiki/Latin_hypercube_sampling)
-- [Halton sequence](http://en.wikipedia.org/wiki/Halton_sequence)
-- [Sobol sequence](http://en.wikipedia.org/wiki/Sobol_sequence)
-- [Low-Discrepancy sequences](http://en.wikipedia.org/wiki/Low-discrepancy_sequence)
-- [Taguchi designs](http://en.wikipedia.org/wiki/Taguchi_methods)
-- [Generalized Subset Designs](https://doi.org/10.1021/acs.analchem.7b00506)
-- [Optimal experimental design](https://en.wikipedia.org/wiki/Optimal_experimental_design)
-- [Sparse grid](https://en.wikipedia.org/wiki/Sparse_grid)
