@@ -2,7 +2,7 @@ name: Build PyDOE Docs
 
 on:
   workflow_call:
-    inputs:
+    inputs: &docs_build_inputs
       deploy:
         type: boolean
         required: false
@@ -12,10 +12,8 @@ on:
         value: ${{ jobs.build.outputs.artifact-name }}
       run-id:
         value: ${{ github.run_id }}
-
-concurrency:
-  group: ${{ github.workflow }}/${{ github.ref }}
-  cancel-in-progress: true
+  workflow_dispatch:
+    *docs_build_inputs
 
 jobs:
   build:
