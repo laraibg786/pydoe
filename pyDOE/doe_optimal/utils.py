@@ -1,4 +1,6 @@
-from typing import Optional, Tuple
+from __future__ import annotations
+
+from typing import Literal
 
 import numpy as np
 
@@ -19,7 +21,9 @@ from pyDOE.doe_optimal.model import (
 )
 
 
-def _xtx_augmented(X, alpha=0.0, X0=None):
+def _xtx_augmented(
+    X: np.ndarray, alpha: float = 0.0, X0: np.ndarray = None
+) -> np.ndarray:
     r"""
     Compute augmented information matrix:
 
@@ -49,7 +53,13 @@ def _xtx_augmented(X, alpha=0.0, X0=None):
     return H
 
 
-def information_matrix(X, *, normalized=True, alpha=0.0, X0=None):
+def information_matrix(
+    X: np.ndarray,
+    *,
+    normalized: bool = True,
+    alpha: float = 0.0,
+    X0: np.ndarray = None,
+) -> np.ndarray:
     r"""
     Compute the information matrix for a design matrix,
     with optional augmentation.
@@ -75,7 +85,14 @@ def information_matrix(X, *, normalized=True, alpha=0.0, X0=None):
     return H_aug / n if normalized else H_aug
 
 
-def criterion_value(X, criterion, X0=None, alpha=0.0, M_moment=None, **kwargs):  # noqa: PLR0911
+def criterion_value(  # noqa: PLR0911
+    X: np.ndarray,
+    criterion: Literal["D", "A", "I", "C", "E", "G", "V", "S", "T"],
+    X0: np.ndarray = None,
+    alpha: float = 0.0,
+    M_moment: np.ndarray = None,
+    **kwargs: dict,
+) -> float:
     """
     Compute the value of a specified optimality criterion for a design matrix.
 
@@ -144,10 +161,10 @@ def _best_single_add(  # noqa: PLR0913, PLR0917
     pool: np.ndarray,
     degree: int,
     criterion: str,
-    X0_model: Optional[np.ndarray],
+    X0_model: np.ndarray | None,
     alpha: float,
-    M_moment: Optional[np.ndarray],
-) -> Tuple[int, float]:
+    M_moment: np.ndarray | None,
+) -> tuple[int, float]:
     """
     Among candidates in 'pool', find index that maximizes criterion
     if added to 'current'.
@@ -196,10 +213,10 @@ def _best_single_drop(  # noqa: PLR0913, PLR0917
     current: np.ndarray,
     degree: int,
     criterion: str,
-    X0_model: Optional[np.ndarray],
+    X0_model: np.ndarray | None,
     alpha: float,
-    M_moment: Optional[np.ndarray],
-) -> Tuple[int, float]:
+    M_moment: np.ndarray | None,
+) -> tuple[int, float]:
     """
     Among points in 'current', find index whose removal gives best criterion.
 

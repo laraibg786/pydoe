@@ -1,17 +1,20 @@
+from __future__ import annotations
+
+from collections.abc import Callable
 from warnings import warn
 
 import numpy as np
 
 
 def random_k_means(  # noqa: PLR0913, PLR0917
-    num_points,
-    dimension,
-    num_steps=None,
-    initial_points=None,
-    callback=None,
-    random_state=None,
-    seed=None,
-):
+    num_points: int,
+    dimension: int,
+    num_steps: int | None = None,
+    initial_points: np.ndarray = None,
+    callback: Callable | None = None,
+    random_state: int | None = None,
+    seed: int | np.random.Generator | None = None,
+) -> np.ndarray:
     """
     MacQueen's K-Means algorithm.
 

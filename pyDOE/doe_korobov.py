@@ -15,7 +15,11 @@ This implementation is based on a simplified rank-1 lattice formulation and
 uses a linear-time algorithm.
 """
 
+from __future__ import annotations
+
 import random
+
+import numpy as np
 
 from pyDOE.doe_rank1 import rank1_lattice
 
@@ -23,7 +27,9 @@ from pyDOE.doe_rank1 import rank1_lattice
 __all__ = ["korobov_sequence"]
 
 
-def korobov_sequence(num_points, dimension, generator_param=None):
+def korobov_sequence(
+    num_points: int, dimension: int, generator_param: int | None = None
+) -> np.ndarray:
     r"""
     Generate a Korobov lattice design matrix.
 

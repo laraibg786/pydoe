@@ -13,6 +13,8 @@ Much thanks goes to these individuals. It has been converted to Python by
 Abraham Lee.
 """
 
+from __future__ import annotations
+
 import itertools
 import math
 import re
@@ -33,7 +35,7 @@ __all__ = [
 ]
 
 
-def fullfact(levels):
+def fullfact(levels: np.ndarray) -> np.ndarray:
     """
     Create a general full-factorial design
 
@@ -196,7 +198,7 @@ def validate_generator(n_factors: int, generator: str) -> str:
     return generator
 
 
-def fracfact(gen) -> np.ndarray:
+def fracfact(gen: str) -> np.ndarray:
     """
     Create a 2-level fractional-factorial design with a generator string.
 
@@ -307,7 +309,7 @@ def fracfact(gen) -> np.ndarray:
     return H
 
 
-def fracfact_by_res(n, res):
+def fracfact_by_res(n: int, res: int) -> np.ndarray:
     """
     Create a 2-level fractional factorial design with `n` factors
     and resolution `res`.
@@ -407,7 +409,7 @@ def fracfact_by_res(n, res):
     return fracfact(gen)
 
 
-def _n_fac_at_res(n, res):
+def _n_fac_at_res(n: int, res: int) -> int:
     """Calculate number of possible factors for fractional factorial
     design with `n` base factors at resolution `res`.
 
@@ -422,7 +424,9 @@ def _n_fac_at_res(n, res):
 ################################################################################
 
 
-def fracfact_opt(n_factors, n_erased, max_attempts=0):  # noqa: PLR0914
+def fracfact_opt(  # noqa: PLR0914
+    n_factors: int, n_erased: int, max_attempts: int = 0
+) -> tuple[str, list[str], np.ndarray]:
     """
     Find the optimal generator string for a 2-level fractional-factorial design
     with the specified number of factors and erased factors.
@@ -459,7 +463,7 @@ def fracfact_opt(n_factors, n_erased, max_attempts=0):  # noqa: PLR0914
         If the number of factors is invalid or too many factors are erased.
     """
 
-    def n_comb(n, k):
+    def n_comb(n: int, k: int) -> int:
         if k <= 0 or n <= 0 or k > n:
             return 0
         return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
@@ -522,7 +526,7 @@ def fracfact_opt(n_factors, n_erased, max_attempts=0):  # noqa: PLR0914
     return best_design, best_map, best_vector
 
 
-def fracfact_aliasing(design):
+def fracfact_aliasing(design: np.ndarray) -> tuple[list[str], np.ndarray]:
     """
     Find the aliasings in a design, given the contrasts.
 
@@ -603,7 +607,7 @@ def fracfact_aliasing(design):
     return aliases_readable, alias_vector
 
 
-def alias_vector_indices(n_factors):
+def alias_vector_indices(n_factors: int) -> tuple[np.ndarray, np.ndarray]:
     """
     Find the indexes to convert the alias_vector into a square matrix and
     vice-versa.
