@@ -18,6 +18,7 @@ jobs:
   full_test:
     name: Basic Tests
     needs: fresh_build
+    secrets: inherit
     uses: ./.github/workflows/code_test.yml
     with:
       artifact-name: ${{ needs.fresh_build.outputs.artifact-name }}
